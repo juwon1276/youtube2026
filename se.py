@@ -191,4 +191,12 @@ if st.button("심층 데이터 분석 시작 🚀"):
                     b1, b2 = st.columns(2)
                     
                     with b1:
-                        st.subheader("⏱️ 댓글 폭발 하
+                        st.subheader("⏱️ 댓글 폭발 하이라이트 시간대")
+                        if timestamps:
+                            time_counts = Counter(timestamps)
+                            top_times = time_counts.most_common(5)
+                            time_df = pd.DataFrame(top_times, columns=["영상 시간", "언급 횟수"])
+                            st.bar_chart(time_df.set_index("영상 시간"))
+                            st.caption("※ 댓글에서 가장 많이 소환된 영상 속 타임스탬프 순위입니다.")
+                        else:
+                            st.info("댓글에 타임스탬프(시간) 정보가 없습니다.")
